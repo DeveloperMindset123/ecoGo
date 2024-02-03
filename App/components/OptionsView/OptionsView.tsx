@@ -66,7 +66,7 @@ const NavOptions = ( {navigation: any} ) => {
                         name="arrowright"
                         color="white"
                         type="antdesign"  //react-native-vector-icons doesn't have a type aspect
-                        onPress={() => navigation.navigate({'Home'})}
+                        onPress={() => navigation.navigate({'eco'})}
                     />
                 </View>
 {/*<Text>{item.title}</Text>  {/*This will render the title stated within the object elements within the data array (uncomment this as needed)*/}

@@ -134,7 +134,7 @@ function renderScreen(api?: Api, error?: Error): React.ReactElement {
 				/>
 				<RootStack.Screen
 					component={OptionsScreen} //this is the TransportationView Component, for now it's the same as the Home view
-					name="Eco"
+					name="Eco"  //this is the TransportationView and RestaurantView landing page
 					{...screenOpt}
 					options={{
 						tabBarIcon: ({ focused, ...restProps }) => (

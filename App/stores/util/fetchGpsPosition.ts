@@ -21,7 +21,7 @@ export function withTimeout<T>(
 	return Promise.race([
 		new Promise<T>((_resolve, reject) => {
 			setTimeout(() => {
-				return reject(new Error(`Request ${desc || ''}timed out.`));
+				return reject(new Error(`Request ${desc || ''}timed out.`));  //I am running into this error at the moment on the emulator
 			}, timeout);
 		}),
 		p,
@@ -57,7 +57,16 @@ export async function fetchGpsPosition(): Promise<ExpoLocation.LocationObject> {
 		throw new Error('Permission to access location was denied');
 	}
 
-	const gps = await ExpoLocation.getCurrentPositionAsync();
+	//const gps = await ExpoLocation.getCurrentPositionAsync();  // --> uncomment this later when we are testing it out on Garv's phone
+
+	//define the hardcoded gps location here for testing purposes
+	const gps = {
+		coords: {
+		  latitude: 40.8091,
+		  longitude: -73.9604,
+		},
+		timestamp: Date.now(),
+	  };
 	// console.log('gps:', gps);
 	// console.log(`[fetchGpsPosition]: Got ${JSON.stringify(gps.coords)}`);
 
