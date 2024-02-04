@@ -69,7 +69,10 @@ export function Events() {
               <Text style={tw`mt-2 text-xl font-semibold`}>{item.title}</Text>
             </View>
             <Icon
-              style={tw`p-2 bg-black flex-row items-center justify-center rounded-full w-24 h-16 mt-4`}
+              style={[
+                tw`p-2 flex-row items-center justify-center rounded-full w-24 h-16 mt-4`,
+                { backgroundColor: "black" },
+              ]}
               name="arrowright"
               color="white"
               type="antdesign"

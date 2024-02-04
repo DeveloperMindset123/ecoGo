@@ -17,7 +17,7 @@ export interface CigaretteTextProps extends ViewProps {
 
 const styles = StyleSheet.create({
   cigarettesCount: {
-    color: theme.colors.orange,
+    color: "tomato",
   },
 });
 

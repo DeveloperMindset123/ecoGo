@@ -1,5 +1,12 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
+import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 
 const ProfileMenu = () => {
   return (
@@ -8,7 +15,10 @@ const ProfileMenu = () => {
         <Text style={styles.headerTitle}>Profile</Text>
       </View>
 
-      <Image source={require('/Users/kvanc99peltek/visual_studio_projects/ecoGo/App/Screens/Profile/Ecogo.png')} style={styles.profileImage} />
+      <Image
+        source={require("../Profile/Ecogo.png")}
+        style={styles.profileImage}
+      />
 
       <Text style={styles.nameText}>Chris Jericho</Text>
       <Text style={styles.designationText}>UI/UX Designer</Text>
@@ -37,12 +47,12 @@ const ProfileMenu = () => {
         <Text style={styles.eventTitle}>Birthday event</Text>
         <Text style={styles.eventDate}>Sat, Jan 10, 2020</Text>
         <Text style={styles.eventDescription}>
-          Something that happens or is regarded as happening; an occurrence, especially one of some importance.
+          Something that happens or is regarded as happening; an occurrence,
+          especially one of some importance.
         </Text>
       </View>
 
       {/* Add Activity section similar to the Event section */}
-
     </ScrollView>
   );
 };
@@ -50,7 +60,7 @@ const ProfileMenu = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
   headerContainer: {
     marginTop: 50,
@@ -58,65 +68,65 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 26,
-    fontWeight: 'bold',
-    color: 'black',
+    fontWeight: "bold",
+    color: "black",
   },
   profileImage: {
     width: 100,
     height: 100,
     borderRadius: 50,
-    alignSelf: 'center',
+    alignSelf: "center",
     marginTop: 20,
   },
   nameText: {
     fontSize: 22,
-    fontWeight: 'bold',
-    alignSelf: 'center',
+    fontWeight: "bold",
+    alignSelf: "center",
     marginTop: 10,
   },
   designationText: {
     fontSize: 16,
-    color: 'grey',
-    alignSelf: 'center',
+    color: "grey",
+    alignSelf: "center",
   },
   locationText: {
     fontSize: 16,
-    color: 'grey',
-    alignSelf: 'center',
+    color: "grey",
+    alignSelf: "center",
     marginBottom: 20,
   },
   statsContainer: {
-    flexDirection: 'row',
-    alignSelf: 'center',
+    flexDirection: "row",
+    alignSelf: "center",
     marginBottom: 20,
   },
   statsBox: {
-    alignItems: 'center',
+    alignItems: "center",
     flex: 1,
   },
   statsNumber: {
     fontSize: 18,
-    fontWeight: 'bold',
-    color: 'tomato',
+    fontWeight: "bold",
+    color: "tomato",
   },
   statsLabel: {
     fontSize: 12,
-    color: 'grey',
+    color: "grey",
   },
   button: {
-    backgroundColor: 'tomato',
+    backgroundColor: "tomato",
     padding: 10,
     borderRadius: 10,
     marginHorizontal: 20,
     marginBottom: 20,
   },
   buttonText: {
-    color: 'white',
-    textAlign: 'center',
-    fontWeight: 'bold',
+    color: "white",
+    textAlign: "center",
+    fontWeight: "bold",
   },
   eventContainer: {
-    backgroundColor: '#f2f2f2',
+    backgroundColor: "#f2f2f2",
     borderRadius: 10,
     padding: 15,
     marginHorizontal: 20,
@@ -124,17 +134,17 @@ const styles = StyleSheet.create({
   },
   eventTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 5,
   },
   eventDate: {
     fontSize: 14,
-    color: 'grey',
+    color: "grey",
     marginBottom: 10,
   },
   eventDescription: {
     fontSize: 14,
-    color: 'grey',
+    color: "grey",
   },
   // Add styles for your Activity section here
 });

@@ -162,6 +162,7 @@ export function Home(props: HomeProps): React.ReactElement {
       />
       <View style={styles.withMargin} />
       <Pollution />
+
       <CigarettesBlock
         cigarettes={cigarettes.count}
         cigarettesStyle={styles.cigarettes}
