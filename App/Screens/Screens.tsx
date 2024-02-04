@@ -19,6 +19,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { Solar } from './Solar';
 import { TransportionView } from './Transportation/Transporation'; //import the trnasportation view
 import 'react-native-gesture-handler'; //may be needed according to the tutorial
+import {Profile} from './Profile';
 
 /**
  * The main stack navigator, for the app.
@@ -151,7 +152,7 @@ function renderScreen(api?: Api, error?: Error): React.ReactElement {
 					}}
 				/>
 				<RootStack.Screen
-					component={Details}
+					component={Profile}
 					name="Profile"
 					{...screenOpt}
 					options={{
