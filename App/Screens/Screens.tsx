@@ -5,7 +5,6 @@ import React, { useContext } from "react";
 import { View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Api } from "@shootismoke/ui";
-
 import { ApiContext, ErrorContext } from "../stores";
 import * as theme from "../util/theme";
 import { Details } from "./Details";
@@ -23,6 +22,8 @@ import { Events } from "./Events";
 import { FindEvent } from "./Events/Find";
 import { HostEvent } from "./Events/Host";
 import { Leaderboard } from "./Events/Leaderboard";
+import { Profile } from "./Profile";
+import ProfileMenu from "./ProfileMenu/Profile";
 /**
  * The main stack navigator, for the app.
  */
@@ -50,6 +51,19 @@ const EventScreen = () => {
       <PooStack.Screen
         component={Leaderboard}
         name="Leaderboard"
+        {...screenOpt}
+      />
+    </PooStack.Navigator>
+  );
+};
+
+const ProfileScreen = () => {
+  return (
+    <PooStack.Navigator initialRouteName="ProfileLog">
+      <PooStack.Screen component={Profile} name="ProfileLog" {...screenOpt} />
+      <PooStack.Screen
+        component={ProfileMenu}
+        name="ProfileMenu"
         {...screenOpt}
       />
     </PooStack.Navigator>
@@ -165,7 +179,7 @@ function renderScreen(api?: Api, error?: Error): React.ReactElement {
           }}
         />
         <RootStack.Screen
-          component={Details}
+          component={ProfileScreen}
           name="Profile"
           {...screenOpt}
           options={{
