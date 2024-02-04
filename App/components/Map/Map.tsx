@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from 'react';
-import MapView, { Marker } from 'react-native-maps';
-import { useSelector } from 'react-redux';
-import tw from 'tailwind-react-native-classnames';
-import { selectDestination, selectOrigin } from '../../../slices/navSlice';
-import MapViewDirections from 'react-native-maps-directions';
-import { GOOGLE_MAPS_API_KEY } from '@env';
+import React, { useEffect, useRef } from "react";
+import MapView, { Marker } from "react-native-maps";
+import { useSelector } from "react-redux";
+import tw from "tailwind-react-native-classnames";
+import { selectDestination, selectOrigin } from "../../../slices/navSlice";
+import MapViewDirections from "react-native-maps-directions";
+import { GOOGLE_MAPS_API_KEY } from "@env";
 
 export const Map = () => {
   const origin = useSelector(selectOrigin);
@@ -13,33 +13,36 @@ export const Map = () => {
 
   const defaultCoordinates = {
     latitude: 40.7128,
-    longitude: -74.0060,
+    longitude: -74.006,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   };
 
-  const initialRegion = origin?.location ? {
-    latitude: origin.location.lat,
-    longitude: origin.location.lng,
-    latitudeDelta: 0.005, 
-    longitudeDelta: 0.005,
-  } : defaultCoordinates;
+  const initialRegion = origin?.location
+    ? {
+        latitude: origin.location.lat,
+        longitude: origin.location.lng,
+        latitudeDelta: 0.005,
+        longitudeDelta: 0.005,
+      }
+    : defaultCoordinates;
 
   useEffect(() => {
     if (!origin || !destination || !mapRef.current) return;
 
     //Zoom and fit to markers
-    mapRef.current.fitToSuppliedMarkers(['origin', 'destination'], {
+    mapRef.current.fitToSuppliedMarkers(["origin", "destination"], {
       edgePadding: { top: 50, right: 50, bottom: 50, left: 50 },
-      animated: true,  // or false if you prefer not to animate
+      animated: true, // or false if you prefer not to animate
     });
   }, [origin, destination]);
 
   return (
     <MapView
+      provider="google"
       ref={mapRef}
       style={tw`flex-1`}
-      mapType='mutedStandard'
+      // mapType="mutedStandard"
       initialRegion={initialRegion}
     >
       {origin && destination && (
@@ -48,34 +51,33 @@ export const Map = () => {
           destination={destination.description}
           apikey={GOOGLE_MAPS_API_KEY}
           strokeWidth={3}
-          strokeColor='green'
+          strokeColor="green"
         />
       )}
       {origin?.location && (
-        <Marker 
+        <Marker
           coordinate={{
             latitude: origin.location.lat,
             longitude: origin.location.lng,
           }}
-          title='Origin'
+          title="Origin"
           description={origin.description}
           identifier="origin"
-        />      
+        />
       )}
       {destination?.location && (
-        <Marker 
+        <Marker
           coordinate={{
             latitude: destination.location.lat,
             longitude: destination.location.lng,
           }}
-          title='Destination'
+          title="Destination"
           description={destination.description}
           identifier="destination"
-        /> 
+        />
       )}
     </MapView>
-  )
-}
-
+  );
+};
 
 //const styles = StyleSheet.create({});
