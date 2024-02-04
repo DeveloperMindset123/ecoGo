@@ -20,8 +20,8 @@ import { useNavigation } from '@react-navigation/native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import MapView from 'react-native-maps';
 import { GOOGLE_MAPS_API_KEY } from '@env';  //this will directly import the GOOGLE_MAPS_API_KEY value from @env
-import { useDispatch } from 'react-redux';
-import { setDestination, setOrigin } from '../../../slices/navSlice';  //as of right now, this file doesn't exist
+import { useDispatch, useSelector } from 'react-redux';
+import { selectOrigin, setDestination, setOrigin } from '../../../slices/navSlice';  //as of right now, this file doesn't exist
 
 
 const data = [  //think of this as an array of objects, we will have to access their methods (each of which is 4 in this case)
@@ -54,6 +54,8 @@ const data = [  //think of this as an array of objects, we will have to access t
 //understanding the purpose of the <view> tag: The most fundamental component for building a UI, View is a container that supports layout with flexbox, style, some touch handling and accessibillity controls.
 export const NavOptions = () => {  //use the useNavigation hook instead
     const navigation = useNavigation();
+    //define the origin
+    const origin = useSelector(selectOrigin);
     return (
        <FlatList 
         data={data} 
@@ -64,8 +66,11 @@ export const NavOptions = () => {  //use the useNavigation hook instead
                 <TouchableOpacity  //this allows for the card view
                 style={[tw`p-2 bg-gray-200 m-2`, { width: '75%', alignSelf: 'center', borderRadius: 30 }]} // Added alignSelf for horizontal centering
                 onPress={() => navigation.navigate(item.screen)} //redirects user to the appropriate screen, make sure the screen names mathc the screen names in PooStack
+                //disable touchableOpacity if not detailed information has been provided
+                disabled={!origin}
                 >
-        <View style={{ alignItems: 'center' }}> 
+        <View style={[tw`${!origin && "opacity-20"}`,  //the purpose of this is to drastically reduce opacity until origin isn't null
+         { alignItems: 'center' }]}> 
             <Image 
                 style={{ width: 120, height: 120, resizeMode: 'contain' }}
                 source={{ uri: item.image }}
@@ -120,7 +125,7 @@ export const OptionsScreen = () => {  //this is the function that is dealing wit
                     key: GOOGLE_MAPS_API_KEY,  //call on the API key from the .env file
                     language: "en",
                 }} 
-                enablePoweredByContainer={false}  //we don't want to show the "PoweredByGoogle" icon
+                enablePoweredByContainer={true}  //we don't want to show the "PoweredByGoogle" icon
                 nearbyPlacesAPI='GooglePlacesSearch'
                 debounce={400} 
                 //define functionality for what will happen upon clicking
@@ -148,11 +153,11 @@ export const OptionsScreen = () => {  //this is the function that is dealing wit
 };
 
 
-const styles = StyleSheet.create({
+const CustomStyles = StyleSheet.create({
     //define the styling information here, allows us to write CSS directory into tsx file 
     text: {
         color: "blue",
-    }
+    },
 
 });  //A stylesheet is an abstraction similar to CSS stylesheets (add CSS within)
 
