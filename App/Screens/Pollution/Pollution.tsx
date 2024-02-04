@@ -18,6 +18,9 @@ import { useDistanceUnit } from "../../stores/distanceUnit";
 import { RootStackParams } from "../routeParams";
 import axios from "axios";
 import { GOOGLE_MAPS_API_KEY } from "@env";
+import { AuthContext } from "../../AuthProvider";
+import { Icon } from "react-native-elements";
+import { Ionicons } from "@expo/vector-icons";
 
 interface DetailsProps {
   navigation: StackNavigationProp<RootStackParams, "Details">;
@@ -67,6 +70,7 @@ const fetchAirQualityData = async (latitude: any, longitude: any) => {
 
 export function Pollution(props: DetailsProps): React.ReactElement {
   const { navigation } = props;
+  const { markers } = useContext(AuthContext); // Add this line to use markers from AuthContext
 
   const [showMap, setShowMap] = useState(false);
   const { api } = useContext(ApiContext);
@@ -241,6 +245,18 @@ export function Pollution(props: DetailsProps): React.ReactElement {
                   {/* FIXME https://github.com/react-native-maps/react-native-maps/issues/3664 */}
                   <Image source={homeIcon as ImageURISource} />
                 </MapMarker>
+                {markers.map((marker, index) => (
+                  <MapMarker
+                    key={index}
+                    coordinate={{
+                      latitude: Number(marker.latitude),
+                      longitude: Number(marker.longitude),
+                    }}
+                    title={`Marker ${index + 1}`}
+                  >
+                    <Ionicons name="trash-bin-sharp" size={24} color="red" />
+                  </MapMarker>
+                ))}
               </>
             )}
           </MapView>

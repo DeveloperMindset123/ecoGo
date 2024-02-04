@@ -1,4 +1,8 @@
-import React from "react";
+import {
+  BottomSheetModal,
+  BottomSheetModalProvider,
+} from "@gorhom/bottom-sheet";
+import React, { useCallback, useMemo, useRef } from "react";
 import {
   View,
   Text,
@@ -7,53 +11,85 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
+import { MapFile } from "../Events/Host/MapFile";
 
 const ProfileMenu = () => {
-  return (
-    <ScrollView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <Text style={styles.headerTitle}>Profile</Text>
-      </View>
-
-      <Image
-        source={require("../Profile/Ecogo.png")}
-        style={styles.profileImage}
-      />
-
-      <Text style={styles.nameText}>Chris Jericho</Text>
-      <Text style={styles.designationText}>UI/UX Designer</Text>
-      <Text style={styles.locationText}>Stanislaus, California</Text>
-
-      <View style={styles.statsContainer}>
-        <View style={styles.statsBox}>
-          <Text style={styles.statsNumber}>08</Text>
-          <Text style={styles.statsLabel}>Events</Text>
+  const Event = ({ handlePresentModalPress, title, date, text }: any) => {
+    return (
+      <TouchableOpacity onPress={handlePresentModalPress}>
+        <View style={styles.eventContainer}>
+          <Text style={styles.eventTitle}>{title}</Text>
+          {/* <Text style={styles.eventDate}>Sat, Jan 10, 2020</Text> */}
+          <Text style={styles.eventDescription}>{text}</Text>
         </View>
-        <View style={styles.statsBox}>
-          <Text style={styles.statsNumber}>05</Text>
-          <Text style={styles.statsLabel}>Pollution</Text>
-        </View>
-        <View style={styles.statsBox}>
-          <Text style={styles.statsNumber}>200</Text>
-          <Text style={styles.statsLabel}>Points</Text>
-        </View>
-      </View>
-
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Event Photo</Text>
       </TouchableOpacity>
+    );
+  };
 
-      <View style={styles.eventContainer}>
-        <Text style={styles.eventTitle}>Birthday event</Text>
-        <Text style={styles.eventDate}>Sat, Jan 10, 2020</Text>
-        <Text style={styles.eventDescription}>
-          Something that happens or is regarded as happening; an occurrence,
-          especially one of some importance.
-        </Text>
-      </View>
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
-      {/* Add Activity section similar to the Event section */}
-    </ScrollView>
+  // variables
+  const snapPoints = useMemo(() => ["25%", "50%"], []);
+
+  // callbacks
+  const handlePresentModalPress = useCallback(() => {
+    bottomSheetModalRef.current?.present();
+  }, []);
+  const handleSheetChanges = useCallback((index: number) => {
+    console.log("handleSheetChanges", index);
+  }, []);
+  return (
+    <BottomSheetModalProvider>
+      <ScrollView style={styles.container}>
+        <View style={styles.headerContainer}>
+          <Text style={styles.headerTitle}>Profile</Text>
+        </View>
+
+        <Image
+          source={require("../Profile/Ecogo.png")}
+          style={styles.profileImage}
+        />
+
+        <Text style={styles.nameText}>Garv S</Text>
+        <Text style={styles.locationText}>New York</Text>
+
+        <View style={styles.statsContainer}>
+          <View style={styles.statsBox}>
+            <Text style={styles.statsNumber}>08</Text>
+            <Text style={styles.statsLabel}>Events</Text>
+          </View>
+          <View style={styles.statsBox}>
+            <Text style={styles.statsNumber}>10</Text>
+            <Text style={styles.statsLabel}>Pollution</Text>
+          </View>
+          <View style={styles.statsBox}>
+            <Text style={styles.statsNumber}>3</Text>
+            <Text style={styles.statsLabel}>Points</Text>
+          </View>
+        </View>
+
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Event Photo</Text>
+        </TouchableOpacity>
+        <BottomSheetModal
+          ref={bottomSheetModalRef}
+          index={1}
+          snapPoints={snapPoints}
+          onChange={handleSheetChanges}
+        >
+          <View style={{ flex: 1, alignItems: "center" }}>
+            <MapFile />
+          </View>
+        </BottomSheetModal>
+        <Event
+          title={"Curdside garbage"}
+          text={"Some stuff that probably fell out of a truck"}
+          handlePresentModalPress={handlePresentModalPress}
+        />
+
+        {/* Add Activity section similar to the Event section */}
+      </ScrollView>
+    </BottomSheetModalProvider>
   );
 };
 

@@ -69,15 +69,17 @@ export function Profile() {
         secureTextEntry
         style={styles.textInput}
       />
+      <View style={{ height: 30 }} />
       {errorMessage ? (
         <Text style={styles.errorText}>{errorMessage}</Text>
       ) : null}
-      <TouchableOpacity style={styles.button} onPress={handleSignUp}>
-        <Text style={styles.buttonText}>Sign Up</Text>
-      </TouchableOpacity>
+
       {signedUp && <Text style={styles.welcomeMessage}>Welcome to EcoGo!</Text>}
       <TouchableOpacity style={styles.button} onPress={handleSignIn}>
         <Text style={styles.buttonText}>Sign In</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={handleSignUp}>
+        <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
     </View>
   );
@@ -95,18 +97,19 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   textInput: {
-    width: "80%",
+    width: "85%",
     fontSize: 18,
     borderColor: "gray",
     borderWidth: 1,
-    borderRadius: 5,
-    padding: 10,
+    borderRadius: 15,
+    padding: 15,
     marginBottom: 10,
   },
   button: {
     backgroundColor: "orange",
-    padding: 15,
-    borderRadius: 5,
+    padding: 12.5,
+    width: "85%",
+    borderRadius: 15,
     marginBottom: 10,
   },
   buttonText: {
