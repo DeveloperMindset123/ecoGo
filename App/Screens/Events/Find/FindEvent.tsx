@@ -1,4 +1,10 @@
-import React, { useCallback, useMemo, useRef } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { SafeAreaView, View, StyleSheet, ScrollView } from "react-native";
 import { Icon, Text } from "react-native-elements";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -12,16 +18,17 @@ import BottomSheet, {
   BottomSheetModalProvider,
 } from "@gorhom/bottom-sheet";
 import { GoBack } from "../GoBack";
+import { MapFile } from "../Host/MapFile";
+import { AuthContext } from "../../../AuthProvider";
+import { SheetMap } from "../Host/SheetMap";
 
-const Event = ({ handlePresentModalPress }: any) => {
+const Event = ({ handlePresentModalPress, title, date, text }: any) => {
   return (
     <TouchableOpacity onPress={handlePresentModalPress}>
       <View style={styles.eventContainer}>
-        <Text style={styles.eventTitle}>Curdside garbage</Text>
-        <Text style={styles.eventDate}>Sat, Jan 10, 2020</Text>
-        <Text style={styles.eventDescription}>
-          Some stuff that probably fell out of a truck
-        </Text>
+        <Text style={styles.eventTitle}>{title}</Text>
+        {/* <Text style={styles.eventDate}>Sat, Jan 10, 2020</Text> */}
+        <Text style={styles.eventDescription}>{text}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -30,12 +37,14 @@ const Event = ({ handlePresentModalPress }: any) => {
 export function FindEvent() {
   const navigation = useNavigation();
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-
+  const { events } = useContext(AuthContext);
   // variables
   const snapPoints = useMemo(() => ["25%", "50%"], []);
+  const [selectedEventMarker, setSelectedEventMarker] = useState<any>(null);
 
   // callbacks
-  const handlePresentModalPress = useCallback(() => {
+  const handlePresentModalPress = useCallback((eventMarker: any) => {
+    setSelectedEventMarker(eventMarker);
     bottomSheetModalRef.current?.present();
   }, []);
   const handleSheetChanges = useCallback((index: number) => {
@@ -57,16 +66,21 @@ export function FindEvent() {
           onChange={handleSheetChanges}
         >
           <View style={styles.contentContainer}>
-            <Text>Awesome 🎉</Text>
+            <SheetMap selectedMarker={selectedEventMarker} />
+            <Button style={{ marginTop: 10 }}>Complete</Button>
           </View>
         </BottomSheetModal>
         <ScrollView>
-          <Event handlePresentModalPress={handlePresentModalPress} />
-          <Event handlePresentModalPress={handlePresentModalPress} />
-          <Event handlePresentModalPress={handlePresentModalPress} />
-          <Event handlePresentModalPress={handlePresentModalPress} />
-          <Event handlePresentModalPress={handlePresentModalPress} />
-          <Event handlePresentModalPress={handlePresentModalPress} />
+          {events &&
+            events.map((event: any) => {
+              return (
+                <Event
+                  title={event.title}
+                  text={event.description}
+                  handlePresentModalPress={handlePresentModalPress}
+                />
+              );
+            })}
         </ScrollView>
       </SafeAreaView>
     </BottomSheetModalProvider>
