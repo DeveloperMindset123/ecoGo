@@ -19,6 +19,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { Pollution } from "./Pollution";
 import { TransportionView } from "./Transportation/Transporation"; //import the trnasportation view
 import "react-native-gesture-handler"; //may be needed according to the tutorial
+import { Events } from "./Events";
 
 /**
  * The main stack navigator, for the app.
@@ -111,13 +112,13 @@ function renderScreen(api?: Api, error?: Error): React.ReactElement {
           }}
         />
         <RootStack.Screen
-          component={Pollution}
-          name="Pollution"
+          component={Events}
+          name="Events"
           {...screenOpt}
           options={{
             tabBarIcon: ({ focused, ...restProps }) => (
               <Ionicons
-                name="map"
+                name="calendar-outline"
                 // size={30}
                 style={{ marginTop: 15 }}
                 // color={focused ? 'tomato' : 'black'}
