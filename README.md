@@ -29,3 +29,20 @@ We aim to refine EcoGo, adding more interactive elements like location-based pol
 - Google Maps (including Directions, Geocoding, Places, and Prediction APIs)
 
 
+## Screenshots
+
+<p float="left">
+  <img src="https://i.ibb.co/56VZGVW/image.png" width="100" />
+  <img src="https://i.ibb.co/9p4ffjB/image.png" width="100" /> 
+  <img src="https://i.ibb.co/0G2bdCk/image.png" width="100" />
+  <img src="https://i.ibb.co/qy1LQ1Y/image.png" width="100" />
+  <img src="https://i.ibb.co/nDDSXDg/image.png" width="100" />
+  <img src="https://i.ibb.co/B6TvL9M/image.png" width="100" />
+  <img src="https://i.ibb.co/Mpkk1YS/image.png" width="100" />
+  <img src="https://i.ibb.co/mJtJtGh/image.png" width="100" />
+  <img src="https://i.ibb.co/b5Hgr84/image.png" width="100" />
+</p>
+
+
+
+
