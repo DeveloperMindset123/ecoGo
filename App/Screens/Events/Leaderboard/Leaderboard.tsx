@@ -42,7 +42,7 @@ export function Leaderboard() {
         <Person name="Kivanc P" eco={96} pol={13} pos={1} />
         <Person name="Ayan D" eco={11} pol={5} pos={2} />
         <Person name="Fahad F" eco={19} pol={43} pos={3} />
-        <Person name="Garv S" eco={0} pol={999} pos={"??"} />
+        <Person name="Garv S" eco={10} pol={3} pos={4} />
       </ScrollView>
     </SafeAreaView>
   );

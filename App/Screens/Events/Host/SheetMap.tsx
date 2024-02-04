@@ -14,10 +14,8 @@ import { useDistanceUnit } from "../../../stores/distanceUnit";
 import { RootStackParams } from "../../routeParams";
 import { Icon } from "react-native-elements";
 import { Marker } from "react-native-maps";
-
-interface DetailsProps {
-  setMarker: any;
-}
+import { AuthContext, AuthProvider } from "../../../AuthProvider";
+import { Ionicons } from "@expo/vector-icons";
 
 const styles = StyleSheet.create({
   container: {
@@ -41,24 +39,14 @@ const styles = StyleSheet.create({
 // Holds the ref to the MapView.Marker representing the AQI station
 let stationMarker: MapMarker | undefined;
 
-export function MapFile(props: DetailsProps): React.ReactElement {
+export function SheetMap(): React.ReactElement {
   const [showMap, setShowMap] = useState(false);
   const { api } = useContext(ApiContext);
   const { currentLocation: _currentLocation } = useContext(
     CurrentLocationContext
   );
   const { distanceUnit } = useDistanceUnit();
-
-  const [customMarker, setCustomMarker] = useState<any>(null);
-
-  const handleMapPress = (e: any) => {
-    const newMarker = {
-      latitude: e.nativeEvent.coordinate.latitude,
-      longitude: e.nativeEvent.coordinate.longitude,
-    };
-    props.setMarker(newMarker);
-    setCustomMarker(newMarker);
-  };
+  const { markers } = useContext(AuthContext); // Add this line to use markers from AuthContext
 
   useEffect(() => {
     // Show map after 200ms for smoother screen transition
@@ -119,19 +107,21 @@ export function MapFile(props: DetailsProps): React.ReactElement {
             // scrollEnabled={false}
             onMapReady={handleMapReady}
             provider={PROVIDER_GOOGLE}
-            onPress={handleMapPress}
             // zoomEnabled={false}
             style={styles.map}
           >
-            {customMarker && (
-              <Marker
-                coordinate={{
-                  latitude: customMarker.latitude,
-                  longitude: customMarker.longitude,
-                }}
-                title={"Selected Location"}
-              />
-            )}
+            {/* {.map((marker: any, index: any) => ( */}
+            <MapMarker
+              // key={index}
+              coordinate={{
+                latitude: Number(markers[2].latitude),
+                longitude: Number(markers[2].longitude),
+              }}
+              // title={`Marker ${index + 1}`}
+            >
+              <Ionicons name="trash-bin-sharp" size={24} color="red" />
+            </MapMarker>
+            {/* ))} */}
           </MapView>
         )}
       </View>
