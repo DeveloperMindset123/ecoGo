@@ -22,6 +22,7 @@ import MapView from 'react-native-maps';
 import { GOOGLE_MAPS_API_KEY } from '@env';  //this will directly import the GOOGLE_MAPS_API_KEY value from @env
 import { useDispatch, useSelector } from 'react-redux';
 import { selectOrigin, setDestination, setOrigin } from '../../../slices/navSlice';  //as of right now, this file doesn't exist
+import { NavFavorites } from '../Map/NavFavorites';
 
 
 const data = [  //think of this as an array of objects, we will have to access their methods (each of which is 4 in this case)
@@ -148,6 +149,7 @@ export const OptionsScreen = () => {  //this is the function that is dealing wit
                     />
 
             <NavOptions /> 
+            <NavFavorites />
         </SafeAreaView>
     );
 };
