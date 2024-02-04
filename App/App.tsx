@@ -17,6 +17,8 @@ import 'react-native-gesture-handler'; //may be needed according the gesture han
 //import the navigation container
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Provider } from 'react-redux';
+import { store } from '../redux/store/store';
 export function App(): React.ReactElement {
 	const [ready, setReady] = useState(false);
 
@@ -41,6 +43,7 @@ export function App(): React.ReactElement {
 	}, []);
 
 	return (
+	<Provider store={store}>
 		<ErrorContextProvider>
 			<LocationContextProvider>
 				<ActionSheetProvider>
@@ -54,5 +57,6 @@ export function App(): React.ReactElement {
 				</ActionSheetProvider>
 			</LocationContextProvider>
 		</ErrorContextProvider>
+	</Provider>
 	);
 }

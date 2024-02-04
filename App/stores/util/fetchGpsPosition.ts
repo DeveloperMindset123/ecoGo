@@ -57,16 +57,16 @@ export async function fetchGpsPosition(): Promise<ExpoLocation.LocationObject> {
 		throw new Error('Permission to access location was denied');
 	}
 
-	//const gps = await ExpoLocation.getCurrentPositionAsync();  // --> uncomment this later when we are testing it out on Garv's phone
+	const gps = await ExpoLocation.getCurrentPositionAsync({ accuracy: ExpoLocation.Accuracy.Highest });  // --> uncomment this later when we are testing it out on Garv's phone
 
 	//define the hardcoded gps location here for testing purposes
-	const gps = {
+	/*const gps = {
 		coords: {
 		  latitude: 40.8091,
 		  longitude: -73.9604,
 		},
 		timestamp: Date.now(),
-	  };
+	  }; */
 	// console.log('gps:', gps);
 	// console.log(`[fetchGpsPosition]: Got ${JSON.stringify(gps.coords)}`);
 
