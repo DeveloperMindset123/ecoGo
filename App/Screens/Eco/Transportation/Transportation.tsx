@@ -1,22 +1,56 @@
-
-import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Text, View } from 'react-native';
+import React from 'react';
+import { SafeAreaView, View, StyleSheet } from 'react-native';
 import tw from 'tailwind-react-native-classnames';
-import { Map } from '../../../components/Map/Map';  //to avoid running into errors, keep things in ts and tsx format
-import MapView from 'react-native-maps';
+import { Map, NavigateCard, RideOptions } from '../../../components/Map/index';
+import { createStackNavigator } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
+import { GoBack } from '../../../components/GoBack/GoBack';
+import { Screens } from '../../Screens';
 
-const Transportation = () => {
+const Transportation = (props:any) => {
+  const Stack = createStackNavigator();
+  const navigation = useNavigation();
+
   return (
-    <View>
-      <View   //recall that View is nothing more than a div (note that View should be imported from the react-native library rather than react-native-elements library)
-      style={tw`h-1/2`}    //this mean this view will take up half the screen, also note that if MapView isn't placed within the view component, the map will not render and will result in an error message
-      >
+    <SafeAreaView style={tw`flex-1`}>
+      <View style={tw`h-1/2`}>
         <Map />
+        <View {...props} style={styles.goBackContainer}>
+          <GoBack  />
+        </View>
       </View>
-    <View style={tw`h-1/2`}></View>
-    </View>
-  )
-}
+      <View style={tw`h-1/2`}>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="NavigateCard"
+            component={NavigateCard}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="RideOptionsCard"
+            component={RideOptions}
+            options={{
+              headerShown: false,
+            }}
+          />
+        </Stack.Navigator>
+      </View>
+    </SafeAreaView>
+  );
+};
 
-export default Transportation
+const styles = StyleSheet.create({
+  goBackContainer: {
+    position: 'absolute',
+    top: 10,  // Adjust these values as needed
+    left: 10,
+    zIndex: 10,  // Ensures the component is above the map
+  },
+});
+
+export default Transportation;
+
+
+
