@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../../firebaseConfig';
+import { useNavigation } from '@react-navigation/native';
 
 // Assuming you have an image called 'logo.png' in your assets folder
 const logo = require('/Users/kvanc99peltek/visual_studio_projects/ecoGo/App/Screens/Profile/Ecogo.png');
@@ -11,6 +12,7 @@ export function Profile() {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [signedUp, setSignedUp] = useState(false);
+  const navigator = useNavigation();
 
   const handleSignUp = () => {
     createUserWithEmailAndPassword(auth, email, password)
@@ -19,6 +21,7 @@ export function Profile() {
         console.log('User created:', userCredential.user);
         setSignedUp(true);
         setErrorMessage('');
+        navigator.navigate('ProfileMenu')
       })
       .catch((error) => {
         setErrorMessage(error.message);
@@ -32,6 +35,7 @@ export function Profile() {
         // Signed in
         console.log('User signed in:', userCredential.user);
         setErrorMessage('');
+        navigator.navigate('ProfileMenu')
       })
       .catch((error) => {
         setErrorMessage(error.message);

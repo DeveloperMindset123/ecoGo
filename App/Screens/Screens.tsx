@@ -20,6 +20,7 @@ import { Solar } from './Solar';
 import { TransportionView } from './Transportation/Transporation'; //import the trnasportation view
 import 'react-native-gesture-handler'; //may be needed according to the tutorial
 import {Profile} from './Profile';
+import ProfileMenu from './ProfileMenu/Profile';
 
 /**
  * The main stack navigator, for the app.
@@ -37,6 +38,15 @@ const ErrorStack = createStackNavigator();
  */
 const screenOpt = {
 	options: { headerShown: false },
+};
+
+const ProfileScreen = () => {
+	return (
+		<PooStack.Navigator initialRouteName="ProfileLog">
+			<PooStack.Screen component={Profile} name="ProfileLog" {...screenOpt} />
+			<PooStack.Screen component={ProfileMenu} name="ProfileMenu" {...screenOpt} />
+		</PooStack.Navigator>
+	);
 };
 
 const HomeScreen = () => {
@@ -152,7 +162,7 @@ function renderScreen(api?: Api, error?: Error): React.ReactElement {
 					}}
 				/>
 				<RootStack.Screen
-					component={Profile}
+					component={ProfileScreen}
 					name="Profile"
 					{...screenOpt}
 					options={{
