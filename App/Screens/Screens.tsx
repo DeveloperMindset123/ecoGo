@@ -20,7 +20,9 @@ import { Pollution } from "./Pollution";
 import { TransportionView } from "./Transportation/Transporation"; //import the trnasportation view
 import "react-native-gesture-handler"; //may be needed according to the tutorial
 import { Events } from "./Events";
-
+import { FindEvent } from "./Events/Find";
+import { HostEvent } from "./Events/Host";
+import { Leaderboard } from "./Events/Leaderboard";
 /**
  * The main stack navigator, for the app.
  */
@@ -37,6 +39,21 @@ const ErrorStack = createStackNavigator();
  */
 const screenOpt = {
   options: { headerShown: false },
+};
+
+const EventScreen = () => {
+  return (
+    <PooStack.Navigator initialRouteName="EventsScreen">
+      <PooStack.Screen component={Events} name="EventsScreen" {...screenOpt} />
+      <PooStack.Screen component={HostEvent} name="Find" {...screenOpt} />
+      <PooStack.Screen component={FindEvent} name="Host" {...screenOpt} />
+      <PooStack.Screen
+        component={Leaderboard}
+        name="Leaderboard"
+        {...screenOpt}
+      />
+    </PooStack.Navigator>
+  );
 };
 
 const HomeScreen = () => {
@@ -112,7 +129,7 @@ function renderScreen(api?: Api, error?: Error): React.ReactElement {
           }}
         />
         <RootStack.Screen
-          component={Events}
+          component={EventScreen}
           name="Events"
           {...screenOpt}
           options={{
