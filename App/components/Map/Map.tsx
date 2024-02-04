@@ -31,7 +31,7 @@ export const Map = () => {
     >
       {origin?.location && (
         <Marker 
-          coordinate={{
+          coordinate={{  //the purpose of this marker is to render the red icon display on the user's location specified
             latitude: origin.location.lat,
             longitude: origin.location.lng,
           }}
