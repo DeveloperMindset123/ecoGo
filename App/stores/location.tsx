@@ -71,21 +71,21 @@ export function LocationContextProvider({
 
 	// Fetch GPS location
 	useEffect(() => {
-		withTimeout(fetchGpsPosition(), 10000, 'for GPS position ')
-			.then(({ coords }) => {
-				setGpsLocation(coords);
-				setCurrentLocation(coords);
+		fetchGpsPosition()  //this will remove the timeout
+		.then(({ coords }) => {
+		setGpsLocation(coords);
+		setCurrentLocation(coords);
 
 				// don't want to wait for the reverse geocode to
 				// finish, so we don't await/return it.
-				withTimeout(
+				//withTimeout(  --> uncomment if you want timeout enabled
 					fetchReverseGeocode(coords).then((gpsLocation) => {
 						setGpsLocation(gpsLocation);
 						setCurrentLocation(coords);
-					}),
-					5000,
-					'for fetchReverseGeocode '
-				).catch((err) => {
+					})//,
+					//5000,
+					//'for fetchReverseGeocode ')
+				.catch((err) => {
 					console.error(err);
 				});
 			})

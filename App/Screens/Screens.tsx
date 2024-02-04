@@ -16,7 +16,13 @@ import { Search } from "./Search";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Pollution } from "./Pollution";
-import { TransportionView } from "./Transportation/Transporation"; //import the trnasportation view
+import { TransportionView } from "./Eco/Eco"; //import the trnasportation view
+import "react-native-gesture-handler"; //may be needed according to the tutorial
+import { OptionsScreen } from "../components/OptionsView/OptionsView"; //add this to the ListOptions function
+import Community from "./Eco/Community/Community"; //add this to the ListOptions function
+import Shopping from "./Eco/Shopping/Shopping"; //add this to the ListOptions function
+import Transportation from "./Eco/Transportation/Transportation"; //add this to the ListOptions function
+import Restaurants from "./Eco/Restaurants/Restaurants"; //import the trnasportation view
 import "react-native-gesture-handler"; //may be needed according to the tutorial
 import { Events } from "./Events";
 import { FindEvent } from "./Events/Find";
@@ -79,18 +85,34 @@ const HomeScreen = () => {
   );
 };
 
-const OptionsScreen = () => {
+const ListOptions = () => {
   //this screen will keep track of the flow of the options screen when clicked on the transporation ba
   return (
-    <PooStack.Navigator initialRouteName="Options">
+    //use this to declare the list of screens and their navigation
+    <PooStack.Navigator initialRouteName="OptionsView">
       <PooStack.Screen
-        component={TransportionView}
-        name="Restaurant"
+        component={OptionsScreen}
+        name="OptionsScreen"
         {...screenOpt}
       />
       <PooStack.Screen
-        component={Search}
-        name="Transportation"
+        component={Community}
+        name="CommunityHelpers" //ensure that the names here matches the names on the data array
+        {...screenOpt}
+      />
+      <PooStack.Screen
+        component={Shopping}
+        name="ShoppingScreen" //this is the name of the screen associated with the data array in the OptionsView.tsx
+        {...screenOpt}
+      />
+      <PooStack.Screen
+        component={Transportation}
+        name="TransportationScreen" //this is the name of the screen associated with the data array in OptionsView.tsx
+        {...screenOpt}
+      />
+      <PooStack.Screen
+        component={Restaurants}
+        name="EatsScreen" //this is the name of the screen associated with the data array in OptionsView.tsx
         {...screenOpt}
       />
     </PooStack.Navigator>
@@ -161,8 +183,8 @@ function renderScreen(api?: Api, error?: Error): React.ReactElement {
           }}
         />
         <RootStack.Screen
-          component={OptionsScreen} //this is the TransportationView Component, for now it's the same as the Home view
-          name="Eco"
+          component={ListOptions} //this is the TransportationView Component, for now it's the same as the Home view
+          name="Eco" //this is the TransportationView and RestaurantView landing page
           {...screenOpt}
           options={{
             tabBarIcon: ({ focused, ...restProps }) => (
