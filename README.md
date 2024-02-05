@@ -23,25 +23,24 @@ We aim to refine EcoGo, adding more interactive elements like location-based pol
 
 ## Built With
 - React Native
+- Expo
 - TypeScript
 - Firebase
 - GCP
 - Google Maps (including Directions, Geocoding, Places, and Prediction APIs)
 
 
-## Screenshots
 
-<p float="left">
-  <img src="https://i.ibb.co/56VZGVW/image.png" width="100" />
-  <img src="https://i.ibb.co/9p4ffjB/image.png" width="100" /> 
-  <img src="https://i.ibb.co/0G2bdCk/image.png" width="100" />
-  <img src="https://i.ibb.co/qy1LQ1Y/image.png" width="100" />
-  <img src="https://i.ibb.co/nDDSXDg/image.png" width="100" />
-  <img src="https://i.ibb.co/B6TvL9M/image.png" width="100" />
-  <img src="https://i.ibb.co/Mpkk1YS/image.png" width="100" />
-  <img src="https://i.ibb.co/mJtJtGh/image.png" width="100" />
-  <img src="https://i.ibb.co/b5Hgr84/image.png" width="100" />
-</p>
+
+## Screenshots
+<img src="https://github.com/DeveloperMindset123/ecoGo/assets/39009375/0c3456e5-639f-4731-8ee5-2ee402068371" width="250" />
+<img src="https://github.com/DeveloperMindset123/ecoGo/assets/39009375/cf16d9de-4236-4982-96b9-efd0ba9016ac" width="250" />
+<img src="https://github.com/DeveloperMindset123/ecoGo/assets/39009375/ee087773-da37-4c16-8cec-cf98f1d4058e" width="250" />
+<img src="https://github.com/DeveloperMindset123/ecoGo/assets/39009375/0e33cb92-30c9-4c4a-b905-ccc42c982d13" width="250" />
+<img src="https://github.com/DeveloperMindset123/ecoGo/assets/39009375/f3f79c48-0868-4a6f-bec6-95bb7b1c136a" width="250" />
+<img src="https://github.com/DeveloperMindset123/ecoGo/assets/39009375/05212dbb-60a3-469b-9fdc-95212098a69a" width="250" />
+<img src="https://github.com/DeveloperMindset123/ecoGo/assets/39009375/3744cd3a-e18a-4ddb-83c5-72c6c7706af9" width="250" />
+
 
 
 
